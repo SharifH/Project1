@@ -13,6 +13,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'twitter'
 gem 'omniauth-twitter'
+gem 'nifty-generators'
 
 group :test, :development do
   gem 'rspec-rails'
