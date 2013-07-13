@@ -9,6 +9,10 @@ gem 'nokogiri'
 gem 'pg'
 gem 'devise'
 gem 'rake'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'twitter'
+gem 'omniauth-twitter'
 
 group :test, :development do
   gem 'rspec-rails'
