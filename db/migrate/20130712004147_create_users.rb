@@ -4,7 +4,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :name
       t.string :username
       t.string :twitter
-      t.boolean :bartender, :default => false
+      t.boolean :bartender, :default => 'false'
       t.timestamps
     end
   end

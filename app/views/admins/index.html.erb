@@ -1,0 +1,28 @@
+<%stylesheet_link_tag('admin.css')%>
+
+<div class = "Admin_View">
+  <h1>Admin Console</h1>
+  <div class = "Users">
+    <strong>Users</strong>
+    <%= form_for @users do |f| %>
+    <%= f.label :username %>
+    <%= f.select :username, User.all.map{|user| [user.username, user.id]}, :include_blank => true, :prompt => "Pick User" %>
+    <br>
+    <%= f.submit %>
+    <%end%>
+  </div>
+  <p>
+  <div class="Bars">
+    <strong>Bars</strong>
+    <%= form_for @businesses do |f| %>
+    <%= f.label :name %>
+    <%= f.select :name, Business.all.map{|biz| [biz.name, biz.id]}, :include_blank => true, :prompt => "Pick User" %>
+    <br>
+    <%= f.submit %>
+    <%end%>
+    <p>
+    <div class = "New_Bar">
+      <%= link_to "Add Bar", new_business_path%>
+    </div>
+  </div>
+</div>

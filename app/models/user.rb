@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :username, :password, :password_confirmation, :remember_me
-  attr_accessible :name, :twitter, :business_id, :contest_id, :prize_id
+  attr_accessible :name, :twitter, :business_id, :contest_id, :prize_id, :bartender
   has_and_belongs_to_many :businesses
 
   has_and_belongs_to_many :contests
@@ -39,10 +39,6 @@ class User < ActiveRecord::Base
    def password_required?
      super && provider.blank?
    end
-
-   # def email_required?
-   #   super && provider.blank?
-   # end
 
    def update_with_password(params, *options)
      if encrypted_password.blank?

@@ -1,1 +1,13 @@
-<%= @shalom %>
+
+
+<div class = "welcome"%>
+
+  <% if current_user.bartender %>
+    <h1>Contest Management System </h1>
+  <% elsif current_user.admin? %>
+    <h1>System Management</h1>
+    <%= link_to "System Management", admins_path %>
+  <%else%>
+    <h1>Check-in</h1>
+  <%end%>
+</div>
