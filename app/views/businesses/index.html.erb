@@ -1,0 +1,17 @@
+<div class="Bars" </div>
+<strong>Bars</strong>
+<% if Business.dbEmpty %>
+  <h2> No businesses on file </h2>
+  <% else %>
+   <p>
+    <% @businesses = Business.all %>
+    <% @businesses.each do |f| %>
+    <ol>
+      <li>Bar Name:<%= link_to f.name, edit_business_path(f.id) %></li>
+    </ol>
+    <%end%>
+ <%end%>
+</div>
+<div class = "New_Bar">
+  <%= link_to "Add Bar", new_business_path%>
+</div>

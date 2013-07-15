@@ -1,9 +1,9 @@
 Proj1::Application.routes.draw do
 
-  devise_for :admins
-
+ devise_for :admins
  devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}, controllers: {omniauth_callbacks: "omniauth_callbacks"}
  root :to => 'home#index'
+
  resources :users
  resources :admins, only: [:index]
  resources :businesses

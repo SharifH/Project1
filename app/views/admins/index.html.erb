@@ -1,26 +1,29 @@
-<%stylesheet_link_tag('admin.css')%>
+
 
 <div class = "Admin_View">
   <h1>Admin Console</h1>
   <div class = "Users">
     <strong>Users</strong>
-    <%= form_for @users do |f| %>
-    <%= f.label :username %>
-    <%= f.select :username, User.all.map{|user| [user.username, user.id]}, :include_blank => true, :prompt => "Pick User" %>
-    <br>
-    <%= f.submit %>
+    <% @users.each do |f| %>
+    <ul>
+      <li>Registration for <%= link_to f.username, edit_user_registration_path(f) %></li>
+      <li>Additional info <%= link_to f.username, edit_user_path(f) %>
+    </ul>
     <%end%>
   </div>
   <p>
   <div class="Bars">
     <strong>Bars</strong>
-    <%= form_for @businesses do |f| %>
-    <%= f.label :name %>
-    <%= f.select :name, Business.all.map{|biz| [biz.name, biz.id]}, :include_blank => true, :prompt => "Pick User" %>
-    <br>
-    <%= f.submit %>
-    <%end%>
-    <p>
+    <% if Business.dbEmpty %>
+      <h2> No businesses on file </h2>
+      <% else %>
+       <p>
+        <% @businesses.each do |f| %>
+        <ol>
+          <li>Bar Name: <%= link_to f.name, f%></li>
+        </ol>
+        <%end%>
+     <%end%>
     <div class = "New_Bar">
       <%= link_to "Add Bar", new_business_path%>
     </div>

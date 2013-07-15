@@ -8,8 +8,9 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :username, :password, :password_confirmation, :remember_me
   attr_accessible :name, :twitter, :business_id, :contest_id, :prize_id, :bartender
-  has_and_belongs_to_many :businesses
 
+  has_many :followers
+  has_many :businesses, :through => :followers
   has_and_belongs_to_many :contests
   has_and_belongs_to_many :prizes
 

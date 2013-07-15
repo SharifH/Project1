@@ -1,0 +1,10 @@
+<div class="Users" </div>
+<strong>Users</strong>
+
+<% @users.each do |f| %>
+  <ol>
+    <li>User Name:<%= link_to f.name, edit_user_path(f) %></li>
+  </ol>
+ <%end%>
+
+</div>

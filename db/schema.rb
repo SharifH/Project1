@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130713231805) do
+ActiveRecord::Schema.define(:version => 20130714015711) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -36,15 +36,12 @@ ActiveRecord::Schema.define(:version => 20130713231805) do
 
   create_table "businesses", :force => true do |t|
     t.string   "name"
-    t.string   "type"
     t.integer  "yelp_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "businesses_users", :force => true do |t|
-    t.integer "business_id"
-    t.integer "user_id"
+    t.string   "address1"
+    t.string   "address2"
+    t.integer  "zip"
   end
 
   create_table "contests", :force => true do |t|
@@ -56,6 +53,11 @@ ActiveRecord::Schema.define(:version => 20130713231805) do
   create_table "contests_users", :force => true do |t|
     t.integer "user_id"
     t.integer "contest_id"
+  end
+
+  create_table "followers", :force => true do |t|
+    t.integer "business_id"
+    t.integer "user_id"
   end
 
   create_table "prizes", :force => true do |t|
