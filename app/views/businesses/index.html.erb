@@ -7,7 +7,7 @@
     <% @businesses = Business.all %>
     <% @businesses.each do |f| %>
     <ol>
-      <li>Bar Name:<%= link_to f.name, edit_business_path(f.id) %></li>
+      <li>Bar Name:<%= link_to f.name, business_path(f.id) %></li>
     </ol>
     <%end%>
  <%end%>

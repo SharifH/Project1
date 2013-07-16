@@ -1,9 +1,12 @@
 
 <ol>
-  <li><%= @business.name %></li>
-  <li><%= @business.address1%></li>
-  <li><%= @business.address2%></li>
-  <li><%= @business.zip %></li>
-  <li><%= @bartender%>
+  <li>Business Name: <%= @business.name %></li>
+  <li>Business Address1: <%= @business.address1%></li>
+  <li>Business Address2: <%= @business.address2%></li>
+  <li>Business ZIP: <%=  @business.zip %></li>
+  <li><%  @bartender.each do |x| %>
+          Bartender: <%= x.username%>
+      <%end%>
+
 <p></p>
 <%= link_to "edit", edit_business_path(@business) %>

@@ -16,13 +16,8 @@ class BusinessesController < ApplicationController
   end
 
   def show
-    @users = []
     @business = Business.find(params[:id])
-    @users = @business.users
-    @users.each { |u|
-      @bartender = u if u.bartender
-    }
-
+    @bartender = User.where(:business_id => params[:id], :bartender => true)
   end
 
   def edit
@@ -31,6 +26,11 @@ class BusinessesController < ApplicationController
 
   def update
     @business = Business.find(params[:id])
+    @bartender = User.find(params[:business][:bartender][:id])
+    @bartender.business_id = @business.id
+    @bartender.bartender = true
+    @bartender.save
+    params[:business].delete(:bartender)
     if @business.update_attributes(params[:business])
       redirect_to businesses_path
     else

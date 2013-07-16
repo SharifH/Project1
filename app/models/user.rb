@@ -6,17 +6,24 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:twitter]
 
   # Setup accessible (or protected) attributes for your model
+
   attr_accessible :email, :username, :password, :password_confirmation, :remember_me
-  attr_accessible :name, :twitter, :business_id, :contest_id, :prize_id, :bartender
+  attr_accessible :name, :twitter, :business_id, :contest_id, :prize_id, :bartender, :business_attributes
 
   has_many :followers
   has_many :businesses, :through => :followers
-  has_and_belongs_to_many :contests
-  has_and_belongs_to_many :prizes
+  belongs_to :bar, :class_name => "Business", :foreign_key => 'business_id'
 
-  # def self.from_omniauth(auth)
-  #    where(auth.slice("provider", "uid")).first || create_from_omniauth(auth)
-  #  end
+  has_many :winnings
+  has_many :prizes, :through => :winnings
+
+  has_many :participations
+  has_many :contests, :through => :participation
+
+  accepts_nested_attributes_for :businesses
+
+  validate :no_adminbar
+
 
    def self.from_omniauth(auth)
      where(auth.slice(:provider, :uid)).first_or_create do |user|
@@ -48,4 +55,12 @@ class User < ActiveRecord::Base
        super
      end
    end
+
+   def no_adminbar
+    if self.admin && self.bartender
+      self.bartender = false
+      errors.add(:bartender, "Can't be an admin and bartender")
+    end
+  end
+
 end

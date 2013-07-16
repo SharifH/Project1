@@ -16,6 +16,8 @@ gem 'omniauth-twitter'
 gem 'nifty-generators'
 gem 'formtastic'
 gem 'tweetstream'
+gem 'pry'
+gem 'pry-rails'
 
 group :test, :development do
   gem 'rspec-rails'

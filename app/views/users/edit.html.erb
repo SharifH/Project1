@@ -1,4 +1,18 @@
+<% unless @user.errors.count == 0 %>
+  <div class="alert alert-error">
+        The form contains <%= pluralize(@user.errors.count, "error") %>.
+  </div>
+  <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li>* <%= msg %></li>
+     <% end %>
+   </ul>
+ <%end%>
+
 <%= semantic_form_for @user do |f| %>
-  <%= f.inputs :name, :twitter, :bartender %>
+  <%= f.inputs :name, :username, :bartender %>
+  <%= f.semantic_fields_for :businesses do |b| %>
+     <%= b.input :business_id, :as => :select, :collection => Hash[@businesses.map{|b| [b.id, b.name]}]%>
+    <%end%>
   <%= f.submit%>
 <%end%>

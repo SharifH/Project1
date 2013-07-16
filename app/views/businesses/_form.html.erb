@@ -2,8 +2,9 @@
   <%= f.inputs :name, :address1, :address2, :zip %>
 
  <h2> Please choose a bartender from the list below </h2>
-    <%= f.semantic_fields_for :users do |f| %>
-    <%= f.input :id,   :collection => Hash[@business.users.all.map{|b| [b.id,b.username]}]
+
+    <%= f.inputs :for => :bartender do |bartender| %>
+    <%= bartender.input :id, :as => :select, :collection => Hash[User.all.map{|b| [b.username, b.id]}]
     %>
   <%end%>
   <p></p>
