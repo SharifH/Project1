@@ -8,6 +8,7 @@
     <% @businesses.each do |f| %>
     <ol>
       <li>Bar Name:<%= link_to f.name, business_path(f.id) %></li>
+                   <%= button_to "Delete Bar", f, :method => :delete %>
     </ol>
     <%end%>
  <%end%>

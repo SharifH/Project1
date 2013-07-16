@@ -22,3 +22,7 @@
  ul.hmenu li {
    display: inline;
  }
+
+ .bar_timeline {
+    border: 1 px solid green;
+ }

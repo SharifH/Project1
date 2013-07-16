@@ -7,7 +7,7 @@ Proj1::Application.routes.draw do
  resources :users
  resources :admins, only: [:index]
  resources :businesses
-
+ get 'follow' => 'businesses#follow'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

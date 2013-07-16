@@ -1,14 +1,29 @@
 class BusinessesController < ApplicationController
 
+  def follow
+    if Twitter.follow(params[:username])
+      render @business
+    else
+      flash[:notice]="Invalid Username"
+      render 'show'
+    end
+  end
+
   def new
     @business = Business.new
-
   end
 
   def create
+    @bartender = User.find(params[:business][:bartender][:id])
+    params[:business].delete(:bartender)
     @business = Business.new(params[:business])
+    @business.save
 
-    if @business.save
+    @bartender.business_id = @business.id
+    @bartender.bartender = true
+    @bartender.save
+
+    if @business
       redirect_to admins_path
     else
       flash[:notice] = "There was an error saving the business record"
@@ -16,8 +31,9 @@ class BusinessesController < ApplicationController
   end
 
   def show
+    @bartenders = User.where(:business_id => params[:id], :bartender => true)
     @business = Business.find(params[:id])
-    @bartender = User.where(:business_id => params[:id], :bartender => true)
+
   end
 
   def edit
@@ -30,6 +46,7 @@ class BusinessesController < ApplicationController
     @bartender.business_id = @business.id
     @bartender.bartender = true
     @bartender.save
+
     params[:business].delete(:bartender)
     if @business.update_attributes(params[:business])
       redirect_to businesses_path
@@ -37,4 +54,14 @@ class BusinessesController < ApplicationController
       flash[:notice] = "Fucked up"
     end
   end
+
+  def destroy
+    @business = Business.find(params[:id])
+    if @business.destroy
+      redirect_to businesses_path
+    else
+      flash[:notice] = "Error destroying business record"
+    end
+  end
+
 end

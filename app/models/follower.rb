@@ -4,5 +4,10 @@ class Follower < ActiveRecord::Base
   belongs_to :user
   belongs_to :business
 
+  # before_save :set_follower_id
+
+  # def set_follower_id
+  #   self.follower_id = self.user_id
+  # end
 
 end

@@ -2,7 +2,8 @@ class HomeController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @shalom = "Hello World"
+    @tweets = current_user.pull_tweets
+    current_user.save
 
   end
 

@@ -4,9 +4,15 @@
   <li>Business Address1: <%= @business.address1%></li>
   <li>Business Address2: <%= @business.address2%></li>
   <li>Business ZIP: <%=  @business.zip %></li>
-  <li><%  @bartender.each do |x| %>
-          Bartender: <%= x.username%>
-      <%end%>
+  <% if current_user.admin == false%>
+    <li><% @bartenders.each do |x|  %>
+           <%= link_to "Follow Bartender: #{x.username}", { action: "follow", username: x.username }%>
+        <%end%>
+     <%elsif current_user.admin%>
+      <%= link_to "edit", edit_business_path(@business) %>
+     <%elsif current_user.bartender%>
 
-<p></p>
-<%= link_to "edit", edit_business_path(@business) %>
+     <%end%>
+
+  <p></p>
+

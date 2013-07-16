@@ -18,6 +18,10 @@ gem 'formtastic'
 gem 'tweetstream'
 gem 'pry'
 gem 'pry-rails'
+gem 'tweet-button'
+
+gem 'formtastic-bootstrap'
+
 
 group :test, :development do
   gem 'rspec-rails'

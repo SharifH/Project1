@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :username, :password, :password_confirmation, :remember_me
   attr_accessible :name, :twitter, :business_id, :contest_id, :prize_id, :bartender, :business_attributes
+  attr_accessible :tweet_id, :screen_name, :content
 
   has_many :followers
   has_many :businesses, :through => :followers
@@ -20,9 +21,13 @@ class User < ActiveRecord::Base
   has_many :participations
   has_many :contests, :through => :participation
 
+  has_one :timeline_id
+
   accepts_nested_attributes_for :businesses
 
   validate :no_adminbar
+
+  # validate :already_chosen
 
 
    def self.from_omniauth(auth)
@@ -62,5 +67,23 @@ class User < ActiveRecord::Base
       errors.add(:bartender, "Can't be an admin and bartender")
     end
   end
+
+  def pull_tweets
+     Twitter.user_timeline("#{self.username}", :count => 50).each do |tweet|
+       unless self.tweet_id
+           self.tweet_id = tweet.id,
+           self.content = tweet.text,
+           self.screen_name = tweet.user.screen_name
+        end
+      end
+    end
+
+
+
+  # def already_chosen
+  #   if self.business_id.nil? == false
+  #     errors.add(:bartender, "This user has already been assigned as bartender")
+  #   end
+  # end
 
 end
