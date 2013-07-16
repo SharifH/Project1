@@ -6,13 +6,19 @@
   <li>Business ZIP: <%=  @business.zip %></li>
   <% if current_user.admin == false%>
     <li><% @bartenders.each do |x|  %>
-           <%= link_to "Follow Bartender: #{x.username}", { action: "follow", username: x.username }%>
-        <%end%>
+           <a href="https://twitter.com/<%="#{x.username}"%>" class="twitter-follow-button" data-show-count="false" data-lang="en">Follow <%="#{x.username}"%></a>
+           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+           <%end%>
      <%elsif current_user.admin%>
       <%= link_to "edit", edit_business_path(@business) %>
-     <%elsif current_user.bartender%>
+ <%end%>
+ <p></p>
+  Latest announcements at the bar:
+  <% @bartenders.each do |x| %>
+    <%x.pull_tweets.each do |timeline| %>
+      <blockquote><%= timeline.text %></blockquote>
+      <div class="from">&mdash; @<%= timeline.user[:screen_name] %></div>
+     <% end %>
+  <%end%>
 
-     <%end%>
-
-  <p></p>
 

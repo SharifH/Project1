@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   attr_accessible :name, :twitter, :business_id, :contest_id, :prize_id, :bartender, :business_attributes
   attr_accessible :tweet_id, :screen_name, :content
 
+
+  before_save :delete_bar_association
   has_many :followers
   has_many :businesses, :through => :followers
   belongs_to :bar, :class_name => "Business", :foreign_key => 'business_id'
@@ -69,16 +71,19 @@ class User < ActiveRecord::Base
   end
 
   def pull_tweets
-     Twitter.user_timeline("#{self.username}", :count => 50).each do |tweet|
-       unless self.tweet_id
-           self.tweet_id = tweet.id,
-           self.content = tweet.text,
-           self.screen_name = tweet.user.screen_name
-        end
-      end
+     Twitter.user_timeline("#{self.username}", :count => 50)
+  end
+
+  def follow(x)
+     username = User.find(x).username
+     Twitter.follow(username)
+   end
+
+  def delete_bar_association
+    if self.bartender == false
+      self.business_id = nil
     end
-
-
+  end
 
   # def already_chosen
   #   if self.business_id.nil? == false

@@ -1,13 +1,5 @@
 class BusinessesController < ApplicationController
 
-  def follow
-    if Twitter.follow(params[:username])
-      render @business
-    else
-      flash[:notice]="Invalid Username"
-      render 'show'
-    end
-  end
 
   def new
     @business = Business.new

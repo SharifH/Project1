@@ -10,16 +10,20 @@
          <% end %>
       </div>
       <%end%>
-  <% elsif current_user.admin? %>
-    <h1>System Management</h1>
-    <%= link_to "System Management", admins_path %>
-  <%else%>
-    <h1>Check-in</h1>
-    <p> Here is a list of all bars in your area.  Check in to one. </p>
-    <ol>
-      <% Business.all.each do |x| %>
-      <li><%=link_to x.name, business_path(x)%></li>
-      <%end%>
-    </ol>
-  <%end%>
+
+
+    <% elsif current_user.admin? %>
+      <h1>System Management</h1>
+      <%= link_to "System Management", admins_path %>
+
+
+    <%else%>
+      <h1>Check-in</h1>
+      <p> Here is a list of all bars in your area.  Check in to one. </p>
+      <ol>
+        <% Business.all.each do |x| %>
+        <li><%=link_to x.name, business_path(x)%></li>
+        <%end%>
+      </ol>
+    <%end%>
 </div>
