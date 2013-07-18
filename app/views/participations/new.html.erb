@@ -1,0 +1,5 @@
+<%= semantic_form_for @participation do |p| %>
+  <%= p.input :contest_id, :as => :select,:collection => Hash[Contest.all.map{|b| [b.name,b.id]}]%>
+  <%  p.input  :user_id %>
+  <%= p.submit %>
+<%end%>

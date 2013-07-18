@@ -4,10 +4,12 @@ Proj1::Application.routes.draw do
  devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}, controllers: {omniauth_callbacks: "omniauth_callbacks"}
  root :to => 'home#index'
 
- resources :users
+ # get '/contests/bar_contest' => 'users#new_for_bartender', :as => :new_for_bartender
+ # post '/contests/bar_contest' => 'users#create_for_bartender', :as => :create_for_bartender
+
+ resources :users, :businesses, :contests, :prizes, :participations
  resources :admins, only: [:index]
- resources :businesses
- get 'follow' => 'businesses#follow'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

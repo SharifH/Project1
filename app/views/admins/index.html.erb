@@ -1,7 +1,7 @@
 <div class = "Admin_View">
   <h1>Admin Console</h1>
   <div class = "Users">
-    <strong>Users</strong>
+    <h2>Users</h2>
     <% @users.each do |f| %>
     <ul>
       <li>Registration for <%= link_to f.username, edit_user_registration_path(f) %></li>
@@ -9,21 +9,61 @@
     </ul>
     <%end%>
   </div>
-  <p>
+
+  <p></p>
+
   <div class="Bars">
-    <strong>Bars</strong>
+    <h2>Bars</h2>
     <% if Business.dbEmpty %>
-      <h2> No businesses on file </h2>
+      <strong> No businesses on file </strong>
       <% else %>
        <p>
-        <% @businesses.each do |f| %>
         <ol>
+        <% @businesses.each do |f| %>
           <li>Bar Name: <%= link_to f.name, f%></li>
-        </ol>
         <%end%>
+        </ol>
      <%end%>
     <div class = "New_Bar">
       <%= link_to "Add Bar", new_business_path%>
     </div>
   </div>
+
+  <p></p>
+  <div class="Contests">
+    <h2>Contests</h2>
+    <% if Contest.first.nil? && Prize.first.nil? %>
+      <strong> No contests on file. You must first create a prize before adding a contest. </strong>
+    <% elsif Prize.first.nil? %>
+      <strong> No prizes on file. You must add a prize. </strong>
+    <% else %>
+      <ol>
+      <% @contests.each do |c| %>
+         <li>Contest Name: <%= link_to c.name, c%></li>
+      <%end%>
+      <div class = "New_Contest">
+        <%= link_to "Add Contest", new_contest_path%>
+      </div>
+      </ol>
+    <%end%>
+
+  </div>
+
+  <div class="Prizes">
+    <h2>Prizes</h2>
+    <% if Prize.first.nil? %>
+      <strong> No prizes on file </strong>
+    <% else %>
+      <ol>
+      <% @prizes.each do |p| %>
+         <li>Prize Name: <%= link_to p.name, prize_path(p) %></li>
+      <%end%>
+      </ol>
+    <%end%>
+    <div class = "New_Prize">
+      <%= link_to "Add Prize", new_prize_path%>
+    </div>
+  </div>
+
+
 </div>

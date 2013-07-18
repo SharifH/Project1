@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130716202337) do
+ActiveRecord::Schema.define(:version => 20130717003308) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -46,8 +46,11 @@ ActiveRecord::Schema.define(:version => 20130716202337) do
 
   create_table "contests", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "expiry"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.text     "description"
+    t.integer  "prize_quantity"
   end
 
   create_table "followers", :force => true do |t|
@@ -62,10 +65,10 @@ ActiveRecord::Schema.define(:version => 20130716202337) do
 
   create_table "prizes", :force => true do |t|
     t.string   "name"
-    t.date     "expiry"
     t.integer  "contest_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "url"
   end
 
   create_table "users", :force => true do |t|
@@ -89,9 +92,6 @@ ActiveRecord::Schema.define(:version => 20130716202337) do
     t.string   "uid"
     t.boolean  "admin",                  :default => false
     t.integer  "business_id"
-    t.string   "tweet_id"
-    t.string   "screen_name"
-    t.text     "content"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

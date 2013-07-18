@@ -1,0 +1,24 @@
+  <% if @contests.empty? %>
+    <h2> You have no current contests </h2>
+  <%end%>
+    <% if current_user.admin %>
+      <ol>
+      <% @contests.each do |contest|  %>
+        <li><%= link_to contest.name, edit_contest_path(contest) %></li>
+        <%= button_to "delete", contest, :method => :delete %>
+      <%end%>
+      <%= link_to "New Contest", new_participation_path %>
+     </ol>
+      <ol>
+    <%elsif current_user.bartender %>
+       <% @contests.each do |contest| %>
+         <li><%= link_to contest.name, edit_contest_path(contest) %></li>
+         <%= button_to "Delete", Participation.find_by_contest_id(contest.id), {:action => "destroy", :controller => "Participation", :method => 'delete'} %>
+      </ol>
+      <%end%>
+
+      <%= link_to "New Contest", new_participation_path %>
+    <%end%>
+
+
+

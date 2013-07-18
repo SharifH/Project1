@@ -1,5 +1,5 @@
 class Prize < ActiveRecord::Base
-  attr_accessible :name, :expiry, :contest_id
+  attr_accessible :name, :contest_id, :url
 
   has_many :winnings
   has_many :users, :through => :winnings

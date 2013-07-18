@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   has_many :prizes, :through => :winnings
 
   has_many :participations
-  has_many :contests, :through => :participation
+  has_many :contests, :through => :participations
 
   has_one :timeline_id
 

@@ -1,0 +1,15 @@
+<%= form_for @contest do |contest| %>
+  <%= contest.text_field :name%>
+  <p>
+  <%= contest.text_area :description %>
+  <p>
+       <% Prize.order(:name).each do |prize| %>
+            <p>
+           <span><%= prize.name %></span>
+            <%= check_box_tag 'contest[prize_ids][]', prize.id, prize.id.in?(@contest.prizes), {class: "checkbox inline"} %>
+          <% end %>
+        <p>
+  <%= contest.label :prize_quantity %>
+  <%= contest.text_field :prize_quantity %>
+<%=contest.submit %>
+<%end%>

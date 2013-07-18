@@ -1,0 +1,7 @@
+<h1>Prizes</h1>
+
+<% @prizes.each do |prize| %>
+  <h2><%=prize.name%></h2>
+  <%=image_tag(prize.url)%>
+  <%= link_to "edit", edit_prize_path(prize)%>
+<%end%>

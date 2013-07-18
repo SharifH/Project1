@@ -1,0 +1,11 @@
+<h1><%= @contest.name %></h1>
+<%= @contest.description %>
+<p>
+<%= @contest.prize_quantity%>
+<p>
+<% @contest.prizes.each do |x| %>
+  <% p = Prize.find(x) %>
+  <%= image_tag(p.url) %>
+<%end%>
+<p>
+<%= link_to "Edit Contest", edit_contest_path(@contest) %>

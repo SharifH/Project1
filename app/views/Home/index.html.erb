@@ -2,6 +2,9 @@
 
   <% if current_user.bartender %>
     <h1>Bartender Management System </h1>
+      <div class = "contests">
+        <%=link_to "manage contests", contests_path %>
+      </div>
       <div id="bar_timeline">
         <% cache "timelines#{Date.today}" do %>
         <% @tweets.each do |timeline| %>
