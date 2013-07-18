@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+
   end
 
   def show
@@ -17,7 +18,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.update_attributes(params[:user])
     if @user.update_attributes(params[:user])
-      redirect_to users_path
+      redirect_to '/'
     else
       flash[:notice] = "You fucked up"
     end

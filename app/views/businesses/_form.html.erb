@@ -5,8 +5,10 @@
  <h2> Please choose a bartender from the list below </h2>
 
     <%= f.inputs :for => :bartender do |bartender| %>
-    <%= bartender.input :id, :as => :select, :collection => Hash[User.all.map{|b| [b.username, b.id]}]
+    <% if current_user.admin or current_user.bartender %>
+      <%= bartender.input :id, :as => :select, :collection => Hash[User.all.map{|b| [b.username, b.id]}]
     %>
+      <%end%>
   <%end%>
   <p></p>
   <%= f.action :submit %>

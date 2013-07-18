@@ -37,6 +37,9 @@ class User < ActiveRecord::Base
          user.provider = auth.provider
          user.uid = auth.uid
          user.username = auth.info.nickname
+         user.oauth_token = auth["credentials"]["token"]
+         user.oauth_secret = auth["credentials"]["secret"]
+         user.save!
        end
    end
 
@@ -49,6 +52,10 @@ class User < ActiveRecord::Base
      else
        super
      end
+   end
+
+   def email_required?
+     super && provider.blank?
    end
 
    def password_required?
@@ -85,10 +92,19 @@ class User < ActiveRecord::Base
     end
   end
 
-  # def already_chosen
-  #   if self.business_id.nil? == false
-  #     errors.add(:bartender, "This user has already been assigned as bartender")
-  #   end
+  # def self.from_omniauth(auth)
+  #   user = where(auth.slice("provider", "uid")).first || create_from_omniauth(auth)
+  #   user.oauth_token = auth["credentials"]["token"]
+  #   user.oauth_secret = auth["credentials"]["secret"]
+  #   user.save!
+  #   user
   # end
+
+  def twitter
+    if provider == "twitter"
+      @twitter ||= Twitter::Client.new(oauth_token: oauth_token, oauth_token_secret: oauth_secret)
+    end
+  end
+
 
 end
