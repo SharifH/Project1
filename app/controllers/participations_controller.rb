@@ -6,15 +6,15 @@ class ParticipationsController < ApplicationController
   end
 
   def create
+
     @participation = Participation.new(params[:participation])
     current_user.contests << Contest.where(:id => @participation.contest_id)
-    if current_user.save
-      redirect_to contests_path
-    end
+    binding.pry
+    redirect_to contests_path
+
   end
 
   def destroy
-    binding.pry
     @participation = Participation.find(params[:id])
     if @participation.destroy
       redirect_to contests_path
