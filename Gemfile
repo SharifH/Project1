@@ -20,14 +20,11 @@ gem 'pry'
 gem 'pry-rails'
 gem 'tweet-button'
 
-gem 'formtastic-bootstrap'
 
 
 group :test, :development do
   gem 'rspec-rails'
   gem 'sqlite3'
-  gem 'simplecov'
-  gem 'shoulda-matchers'
 end
 
 # Gems used only for assets and not required
