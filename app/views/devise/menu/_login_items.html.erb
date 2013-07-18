@@ -1,6 +1,17 @@
 
 <% if user_signed_in? %>
-  <li>
-  <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+  <ol>
+    <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %> </li>
+    <li><%= link_to 'Back', :back %> </li>
+  </ol>
+
+  <div class="user_nav">
+  <% if !current_user.admin && !current_user.bartender%>
+  <ol>
+    <li><%= link_to "Bars", businesses_path %>|</li>
+    <li><%= link_to "Personal Info", edit_user_path(current_user)%>|</li>
+  </ol>
+    <%end%>
+  </div>
 
 <% end %>

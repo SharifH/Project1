@@ -8,8 +8,9 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *
+ *= require bootstrap
  *= require_self
- *= require_tree .
  */
 
 
@@ -23,6 +24,20 @@
    display: inline;
  }
 
+li {
+  list-style: none;
+}
+
  .bar_timeline {
     border: 1 px solid green;
+ }
+
+ .admin_nav li {
+  list-style: none;
+  display: inline;
+ }
+
+ .user_nav li {
+  list-style: none;
+  display: inline;
  }

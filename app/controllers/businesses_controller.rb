@@ -22,9 +22,14 @@ class BusinessesController < ApplicationController
     end
   end
 
+  def index
+    @business = Business.all
+  end
+
   def show
     @bartenders = User.where(:business_id => params[:id], :bartender => true)
     @business = Business.find(params[:id])
+
 
   end
 
