@@ -6,7 +6,7 @@ gem 'rails', '3.2.13'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'pg'
+
 gem 'devise'
 gem 'rake'
 gem 'omniauth'
@@ -16,8 +16,6 @@ gem 'omniauth-twitter'
 gem 'nifty-generators'
 gem 'formtastic'
 gem 'tweetstream'
-gem 'pry'
-gem 'pry-rails'
 gem 'tweet-button'
 
 group :test, :development do
@@ -25,6 +23,9 @@ group :test, :development do
   gem 'sqlite3'
 end
 
+group :production do
+  gem 'pg'
+end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
