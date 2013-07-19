@@ -21,7 +21,7 @@ gem 'omniauth-twitter'
 gem 'nifty-generators'
 gem 'formtastic'
 gem 'tweetstream'
-gem 'tweet-button'
+
 
 
 
