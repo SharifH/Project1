@@ -7,6 +7,11 @@ gem 'rails', '3.2.13'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 
+group :development do
+  gem 'rspec-rails'
+  gem 'pg'
+end
+
 gem 'devise'
 gem 'rake'
 gem 'omniauth'
@@ -18,10 +23,7 @@ gem 'formtastic'
 gem 'tweetstream'
 gem 'tweet-button'
 
-group :test, :development do
-  gem 'rspec-rails'
-  gem 'sqlite3'
-end
+
 
 group :production do
   gem 'pg'

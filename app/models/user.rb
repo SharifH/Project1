@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   attr_accessible :tweet_id, :screen_name, :content
 
 
-  before_save :delete_bar_association
+  #before_save :delete_bar_association
   has_many :followers
   has_many :businesses, :through => :followers
   belongs_to :bar, :class_name => "Business", :foreign_key => 'business_id'
@@ -86,11 +86,11 @@ class User < ActiveRecord::Base
      Twitter.follow(username)
    end
 
-  def delete_bar_association
-    if self.bartender == false
-      self.business_id = nil
-    end
-  end
+  # def delete_bar_association
+  #   if self.bartender == false
+  #     self.business_id = nil
+  #   end
+  # end
 
   # def self.from_omniauth(auth)
   #   user = where(auth.slice("provider", "uid")).first || create_from_omniauth(auth)
