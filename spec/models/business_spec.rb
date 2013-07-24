@@ -6,5 +6,5 @@ describe Business do
   end
 
   it { should have_many(:bartenders) }
-  it { should have_and_belong_to_many(:users) }
+  it { should have_many(:users) }
 end

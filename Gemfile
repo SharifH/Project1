@@ -2,15 +2,9 @@ source 'https://rubygems.org'
 
 ruby "1.9.3"
 gem 'rails', '3.2.13'
-
+gem 'pg'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-
-group :development do
-  gem 'rspec-rails'
-  gem 'pg'
-end
 
 gem 'devise'
 gem 'rake'
@@ -21,13 +15,15 @@ gem 'omniauth-twitter'
 gem 'nifty-generators'
 gem 'formtastic'
 gem 'tweetstream'
+gem 'foreman'
 
 
-
-
-group :production do
-  gem 'pg'
+group :development, :test do
+  gem 'shoulda-matchers'
+  gem 'rspec-rails'
 end
+
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
