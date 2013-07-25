@@ -21,6 +21,8 @@ gem 'foreman'
 group :development, :test do
   gem 'shoulda-matchers'
   gem 'rspec-rails'
+  gem 'pry'
+  gem 'rails-pry'
 end
 
 

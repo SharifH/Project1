@@ -1,36 +1,26 @@
 
-        <% if current_user.bartender %>
-          <h1>Bartender Management System </h1>
-              <%=link_to "manage contests", contests_path %>
-
-        <% elsif current_user.admin? %>
-          <h1>System Management</h1>
-          <%= render 'admins/menu_items'%>
-          <%= link_to "System Management", admins_path %>
-        </div>
-
-
-    <%else%>
-    <div class="span3">
-      <h1>Check-in</h1>
-      <p> Here is a list of all bars in your area.  Check in to one. </p>
-      <ol>
-        <% Business.all.each do |x| %>
-        <li><%=link_to x.name, business_path(x)%></li>
-        <%end%>
-      </ol>
-    <%end%>
+<% if current_user.bartender %>
+  <h1>Bartender Management System </h1>
+  <%=link_to "manage contests", contests_path %>
+  <div class="span9">
+    <% cache "timelines#{Date.today}" do %>
+      <% @tweets.each do |timeline| %>
+        <blockquote><%= timeline.text %></blockquote>
+        <div class="from">&mdash; @<%= timeline.user[:screen_name] %></div>
+        <% end %>
   </div>
+  <%end%>
 
 
-    <div class="span9">
-        <% cache "timelines#{Date.today}" do %>
-        <% @tweets.each do |timeline| %>
-           <blockquote><%= timeline.text %></blockquote>
-           <div class="from">&mdash; @<%= timeline.user[:screen_name] %></div>
-         <% end %>
-      </div>
-      <%end%>
-    </div>
+<%else%>
+  <h1>Check-in</h1>
+  <p> Here is a list of all bars in your area.  Check in to one. </p>
+  <ol>
+    <% Business.all.each do |x| %>
+    <li><%=link_to x.name, business_path(x)%></li>
+    <%end%>
+  </ol>
+<%end%>
 </div>
+
 

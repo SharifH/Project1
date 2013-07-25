@@ -1,24 +1,37 @@
-  <% if @contests.empty? %>
-    <h2> You have no current contests </h2>
+<% if @contests.empty? %>
+  <h2> You have no current contests </h2>
+<%end%>
+
+<% if current_user.admin %>
+  <ol>
+  <% @contests.each do |contest|  %>
+    <li><%= link_to contest.name, edit_contest_path(contest) %></li>
+    <%= button_to "delete", contest, :method => :delete %>
   <%end%>
-    <% if current_user.admin %>
-      <ol>
-      <% @contests.each do |contest|  %>
-        <li><%= link_to contest.name, edit_contest_path(contest) %></li>
-        <%= button_to "delete", contest, :method => :delete %>
+  <%= link_to "New Contest", new_participation_path %>
+ </ol>
+  <ol>
+<% elsif current_user.bartender? %>
+  <%= link_to "New Contest", new_participation_path, :class => "btn" %>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @contests.each do |contest| %>
+        <tr>
+          <td><%= contest.id %></td>
+          <td><%= link_to contest.name, edit_contest_path(contest) %></td>
+          <td>
+            <%= link_to "Delete", Participation.find_by_contest_id(contest.id), :method => :delete, :class => "btn btn-danger" -%>
+          </td>
+        </tr>
       <%end%>
-      <%= link_to "New Contest", new_participation_path %>
-     </ol>
-      <ol>
-    <%elsif current_user.bartender %>
-       <% @contests.each do |contest| %>
-         <li><%= link_to contest.name, edit_contest_path(contest) %></li>
-         <%= button_to "Delete", Participation.find_by_contest_id(contest.id), {:action => "destroy", :controller => "Participation", :method => 'delete'} %>
-      </ol>
-      <%end%>
-
-      <%= link_to "New Contest", new_participation_path %>
-    <%end%>
-
-
-
+    </tbody>
+  </table>
+<%end%>

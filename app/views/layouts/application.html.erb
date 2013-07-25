@@ -7,18 +7,43 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <! Error Messages Will Go Below!>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+  <div class="container-fluid">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <a class="brand" href="/">Happy-Hour</a>
+        <ul class="nav">
+          <% unless current_user.nil? %>
+            <% if current_user.bartender? %>
+            <% binding.pry %>
+              <%= navigation_list_item "Contests", contests_path %>
+            <% elsif current_user.admin? %>
+              <%= navigation_list_item "System", admins_path %>
+              <%= navigation_list_item "Contests", contests_path%>
+              <%= navigation_list_item "Prizes", prizes_path %>
+              <%= navigation_list_item "Bars", businesses_path %>
+              <%= navigation_list_item "Participations", participations_path%>
+            <% else %>
+              <%= navigation_list_item "Home", root_path %>
+            <% end %>
+          <% else %>
+            <%= navigation_list_item "Home", root_path %>
+          <% end %>
+            <%= navigation_list_item "Profile", users_path(current_user) %>
+          <%= navigation_list_item "Logout", destroy_user_session_path, :method => :delete %>
+        </ul>
+      </div>
+    </div>
 
+    <% if flash.key?(:notice) %>
+      <div class="alert alert-info"><%= notice %></div>
+    <%end%>
+    <% if flash.key?(:alert) %>
+      <div class="alert alert-error"><%= alert %></div>
+    <%end%>
 
-  <!Devise global menu system!>
-  <ul class="hmenu">
-    <%= render 'devise/menu/registration_items' %>
-    <%= render 'devise/menu/login_items' %>
-
-  </ul>
-<%= yield %>
-
+    <div class="row-fluid">
+      <%= yield %>
+    </div>
+  </div>
 </body>
 </html>

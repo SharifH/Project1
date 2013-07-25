@@ -3,7 +3,11 @@ class HomeController < ApplicationController
 
   def index
     @tweets = current_user.pull_tweets
-    current_user.save
+    if current_user.bartender?
+      redirect_to contests_path
+    elsif current_user.admin?
+      redirect_to admins_path
+    end
 
   end
 
